@@ -3,14 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var methodOverride = require("method-override");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-let {sequelize} = require('./models/index')
-
 var app = express();
-sequelize.sync()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +19,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//form method
+app.use(methodOverride("_method", {
+  methods: ["POST", "GET"]
+}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
