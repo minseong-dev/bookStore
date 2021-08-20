@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-
-const usersController = require('../controller/users')
+const userController = require('../controller/userController')
 
 /* 회원가입 */
-router.post('/signup', usersController.signup);
+router.post('/signup', userController.signup);
 
 /* 로그인 */
-router.post('/login', usersController.login);
+router.post('/login', userController.login);

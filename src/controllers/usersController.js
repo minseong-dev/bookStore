@@ -1,11 +1,11 @@
-const usersService = require('../services/usersService')
+const userService = require('../services/userService')
 
 exports.signup = async (req, res) => {
 
     const { user_uid, user_password, user_name } = req.body
 
     try {
-        await usersService.signup(user_uid, user_password, user_name)
+        await userService.signup(user_uid, user_password, user_name)
         return res.redirect('/')
     }
 
@@ -20,7 +20,7 @@ exports.login = async (req, res) => {
     const { user_uid, user_password } = req.body
 
     try {
-        await usersService.login(user_uid, user_password)
+        await userService.login(user_uid, user_password)
         return res.redirect('/')
     }
 
