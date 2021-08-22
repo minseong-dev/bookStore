@@ -9,6 +9,7 @@ exports.signup = async (user_uid, user_password, user_name) => {
     }
 
     catch (error) {
+        if(error.errno == 1062) return 1062
         console.log(error)
         throw Error(error)
     }
