@@ -1,7 +1,7 @@
 const db = require('../../middleware/db')
 const userQuery = require('../queries/userQuery')
 
-exports.signup = async () => {
+exports.signup = async (user_uid, user_password, user_name) => {
 
     try{
         let signup = await db.query(userQuery.signup, [user_uid, user_password, user_name])
@@ -9,17 +9,18 @@ exports.signup = async () => {
     }
 
     catch (error) {
+        if(error.errno == 1062) return 1062
         console.log(error)
         throw Error(error)
     }
 
 }
 
-exports.login = async () => {
+exports.signin = async () => {
 
     try{
-        let login = await db.query(userQuery.login, [user_uid, user_password])
-        return login[0]
+        let signin = await db.query(userQuery.signin, [user_uid, user_password])
+        return signin[0]
     }
 
     catch (error) {
