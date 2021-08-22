@@ -1,7 +1,7 @@
 const db = require('../../middleware/db')
 const userQuery = require('../queries/userQuery')
 
-exports.signup = async () => {
+exports.signup = async (user_uid, user_password, user_name) => {
 
     try{
         let signup = await db.query(userQuery.signup, [user_uid, user_password, user_name])

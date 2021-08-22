@@ -6,7 +6,13 @@ const userController = require('../controllers/userController')
 /* 회원가입 */
 router.post('/signup', userController.signup);
 
+/* 회원가입 페이지 */
+router.get('/signup', userController.signupPage);
+
 /* 로그인 */
 router.post('/signin', userController.signin);
+
+/* 로그인 페이지 */
+router.get('/signin', userController.signinPage);
 
 module.exports = router;
