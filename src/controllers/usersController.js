@@ -15,12 +15,12 @@ exports.signup = async (req, res) => {
 
 }
 
-exports.login = async (req, res) => {
+exports.signin = async (req, res) => {
 
     const { user_uid, user_password } = req.body
 
     try {
-        await userService.login(user_uid, user_password)
+        await userService.signin(user_uid, user_password)
         return res.redirect('/')
     }
 

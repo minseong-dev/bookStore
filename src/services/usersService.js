@@ -15,11 +15,11 @@ exports.signup = async () => {
 
 }
 
-exports.login = async () => {
+exports.signin = async () => {
 
     try{
-        let login = await db.query(userQuery.login, [user_uid, user_password])
-        return login[0]
+        let signin = await db.query(userQuery.signin, [user_uid, user_password])
+        return signin[0]
     }
 
     catch (error) {
