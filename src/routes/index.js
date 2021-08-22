@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-const boardRoute = require('./boardRoute')
+const mainRoute = require('./mainRoute')
+const userRoute = require('./userRoute')
 
-router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
-  });
+
+router.use('/', mainRoute)
+router.use('/user', userRoute)
 
 module.exports = router;
