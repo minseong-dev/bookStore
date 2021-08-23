@@ -4,9 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var methodOverride = require("method-override");
+var session = require('express-session');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./src/routes/index');
+var userRouter = require('./src/routes/userRoute');
 
 var app = express();
 
@@ -20,13 +21,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//session
+app.use(session({
+  secret: '45687!@#$%$#^',
+  resave: false,
+  saveUninitialized: true
+}));
+
 //form method
 app.use(methodOverride("_method", {
   methods: ["POST", "GET"]
 }));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', userRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
