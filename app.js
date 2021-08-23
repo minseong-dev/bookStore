@@ -8,6 +8,7 @@ var session = require('express-session');
 
 var indexRouter = require('./src/routes/index');
 var userRouter = require('./src/routes/userRoute');
+var bookRouter = require('./src/routes/bookRoute');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use(methodOverride("_method", {
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);
+app.use('/book', bookRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
