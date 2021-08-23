@@ -1,0 +1,5 @@
+exports.addBook = 'insert into books(book_name, book_stock, book_price, book_writer) values(?, ?, ?, ?)'
+exports.updateBook = 'update books set book_name=?, book_stock=?, book_price=?, book_writer=? where book_uid=?'
+exports.deleteBook = 'delete from books where book_uid=?'
+exports.bookList = 'select book_name, book_price, book_writer from books'
+exports.bookDetail = 'select * from books where book_uid=?'
