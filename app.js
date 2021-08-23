@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //session
 app.use(session({
-  secret: 'keyboard cat',
+  secret: '45687!@#$%$#^',
   resave: false,
   saveUninitialized: true
 }));

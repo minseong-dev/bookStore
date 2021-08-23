@@ -6,7 +6,7 @@ exports.signup = async (req, res) => {
 
     try {
         let signup = await userService.signup(user_uid, user_password, user_name)
-        
+
         if(signup == 1062){
             return res.send(`<script type="text/javascript">
                 alert("이미 사용중인 아이디 입니다."); 
@@ -40,7 +40,8 @@ exports.signin = async (req, res) => {
     const { user_uid, user_password } = req.body
 
     try {
-        await userService.signin(user_uid, user_password)
+        let signin = await userService.signin(user_uid, user_password)
+        req.session.user_uid = signin[0].user_uid
         return res.redirect('/')
     }
 
@@ -58,7 +59,8 @@ exports.signin = async (req, res) => {
 exports.signinPage = async (req, res) => {
     
     try{
-        return res.render('signin')
+        let sess = req.session.user_uid
+        return res.render('signin', {  sess:sess } )
     }
 
     catch (error) {
