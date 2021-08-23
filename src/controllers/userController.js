@@ -27,7 +27,7 @@ exports.signupPage = async (req, res) => {
     
     try{
         let sess = req.session.user_uid
-        return res.render('./user/signup', { sess:sess })
+        return res.render('index', { page:'./user/signup', sess:sess })
     }
 
     catch (error) {
@@ -61,7 +61,7 @@ exports.signinPage = async (req, res) => {
     
     try{
         let sess = req.session.user_uid
-        return res.render('./user/signin', { sess:sess })
+        return res.render('index', { page:'./user/signin', sess:sess })
     }
 
     catch (error) {
