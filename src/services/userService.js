@@ -16,7 +16,7 @@ exports.signup = async (user_uid, user_password, user_name) => {
 
 }
 
-exports.signin = async () => {
+exports.signin = async (user_uid, user_password) => {
 
     try{
         let signin = await db.query(userQuery.signin, [user_uid, user_password])

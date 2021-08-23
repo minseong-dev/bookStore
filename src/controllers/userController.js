@@ -45,7 +45,12 @@ exports.signin = async (req, res) => {
     }
 
     catch(error) {
-        return res.status(500).json(error)
+        res.send(
+            `<script type="text/javascript">
+            alert("아이디 또는 비밀번호가 올바르지 않습니다."); 
+            location.href='./signin';
+            </script>`
+        );
     }
 
 }
