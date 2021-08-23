@@ -15,23 +15,14 @@
           </tr>
         </thead>
         <tbody>
+        <% for(let book of book_info){ %>
           <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <th scope="row"><%= book_info.indexOf(book) + 1 %></th>
+            <td><a href="/book/bookDetail/<%= book.book_uid %>"><%= book.book_name %></a></td>
+            <td><%= book.book_writer %></td>
+            <td><%= book.book_price %>원</td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
+        <%}%>
         </tbody>
       </table><table class="table table-striped">
         ...
