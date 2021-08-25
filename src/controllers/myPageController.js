@@ -29,7 +29,7 @@ exports.addCard = async (req, res) => {
 
     try{
         await myPageService.addCard(card_uid, card_exp, card_com, users_user_uid)
-        return res.redirect('/myPage')
+        return res.redirect('/myPage/main/'+users_user_uid)
 
     }
     
@@ -43,7 +43,7 @@ exports.addCardPage = async (req, res) => {
     
     try{
         let sess = req.session.user_uid
-        return res.render('index', { page:'./mypage/addCard', sess:sess })
+        return res.render('index', { page:'./myPage/addCard', sess:sess })
     }
 
     catch (error) {
@@ -59,7 +59,7 @@ exports.updateCard = async (req, res) => {
 
     try{
         await myPageService.updateCard(card_exp, card_com, card_uid)
-        return res.redirect('/myPage')
+        return res.redirect('/myPage/main/'+req.session.user_uid)
     }
 
     catch (erroe) {
@@ -94,7 +94,7 @@ exports.deleteCard = async (req, res) => {
     
     try{
         await myPageService.deleteCard(card_uid)
-        return res.redirect('/myPage')
+        return res.redirect('/myPage/main/'+req.session.user_uid)
     } 
     
     catch (error) {
@@ -110,10 +110,10 @@ exports.addDest = async (req, res) => {
 
     try{
 
-        let destination_uid = String(1000000 * Math.random())
+        let destination_uid = String(Math.random()*100000000)
 
         await myPageService.addDest(destination_uid, destination_post, destination_addr, destination_detail, users_user_uid)
-        return res.redirect('/myPage')
+        return res.redirect('/myPage/main/'+users_user_uid)
     }
     
     catch (error) {
@@ -142,7 +142,7 @@ exports.updateDest = async (req, res) => {
 
     try{
         await myPageService.updateDest(destination_post, destination_addr, destination_detail, destination_uid)
-        return res.redirect('/myPage')
+        return res.redirect('/myPage/main/'+req.session.user_uid)
     }
 
     catch (erroe) {
@@ -177,7 +177,7 @@ exports.deleteDest = async (req, res) => {
     
     try{
         await myPageService.deleteDest(destination_uid)
-        return res.redirect('/myPage')
+        return res.redirect('/myPage/main/'+req.session.user_uid)
     } 
     
     catch (error) {

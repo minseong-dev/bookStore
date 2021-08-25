@@ -4,7 +4,7 @@ var router = express.Router();
 const myPageController = require('../controllers/myPageController')
 
 /* 마이페이지 */
-router.get('/:users_user_uid', myPageController.myPage);
+router.get('/main/:users_user_uid', myPageController.myPage);
 
 
 
