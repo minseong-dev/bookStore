@@ -130,7 +130,7 @@ exports.destDetail = async (destination_uid) => {
 exports.deleteDest = async (destination_uid) => {
     
     try{
-        let del = await db.query(myPageService.deleteDest, [destination_uid])
+        let del = await db.query(myPageQuery.deleteDest, [destination_uid])
         return del[0]
     } 
     

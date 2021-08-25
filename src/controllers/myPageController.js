@@ -110,10 +110,10 @@ exports.addDest = async (req, res) => {
 
     try{
 
-        let destination_uid = String(1000000 * Math.random())
+        let destination_uid = String(Math.random()*100000000)
 
         await myPageService.addDest(destination_uid, destination_post, destination_addr, destination_detail, users_user_uid)
-        return res.redirect('/myPage')
+        return res.redirect('/myPage/main/'+users_user_uid)
     }
     
     catch (error) {
@@ -142,7 +142,7 @@ exports.updateDest = async (req, res) => {
 
     try{
         await myPageService.updateDest(destination_post, destination_addr, destination_detail, destination_uid)
-        return res.redirect('/myPage')
+        return res.redirect('/myPage/main/'+req.session.user_uid)
     }
 
     catch (erroe) {
@@ -177,7 +177,7 @@ exports.deleteDest = async (req, res) => {
     
     try{
         await myPageService.deleteDest(destination_uid)
-        return res.redirect('/myPage')
+        return res.redirect('/myPage/main/'+req.session.user_uid)
     } 
     
     catch (error) {
