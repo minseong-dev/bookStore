@@ -17,14 +17,17 @@
             <td style='vertical-align: middle'><%= card.card_exp %></td>
             <td>
                 <div class="btn-group" role="group" aria-label="Basic outlined example">
-                    <button type="button" class="btn btn-outline-primary">수정</button>
-                    <button type="button" class="btn btn-outline-primary">삭제</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/myPage/updateCard/<%= card.card_uid %>'">수정</button>
+                    <form action='/myPage/deleteCard/<%= card.card_uid %>?_method=DELETE' method='post'>
+                      <button type="submit" class="btn btn-outline-primary">삭제</button>
+                    </form>
                   </div>
             </td>
           </tr>
         <%}%>
         </tbody>
     </table>
+    <button type="button" class="btn btn-primary" onclick="location.href='/myPage/addCard'">추가</button>
 </div>
 
 <!-- dest -->
