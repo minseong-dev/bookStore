@@ -10,6 +10,6 @@ router.post('/order/:order_uid', orderController.order);
 router.get('/orderPage/:user_uid', orderController.orderPage);
 
 /* 주문목록 페이지 */
-router.get('/orderListPage/:user_uid')
+router.get('/orderListPage/:user_uid', orderController.orderListPage);
 
 module.exports = router;

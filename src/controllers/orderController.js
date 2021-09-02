@@ -32,3 +32,16 @@ exports.orderPage = async (req, res) => {
     }
 
 }
+
+exports.orderListPage = async (req, res) => {
+    
+    try{
+        let sess = req.session.user_uid
+        return res.render('index', { page:'./order/orderList', sess:sess })
+    }
+
+    catch (error) {
+        return res.status(500).json(error)
+    }
+
+}
