@@ -2,8 +2,9 @@ const orderService = require('../services/orderService')
 
 exports.order = async (req, res) => {
 
-    const { order_date, order_amount, card_com, card_uid, card_exp, destination_post, destination_addr, destination_detail, users_user_uid } = req.body
+    const { order_amount, card_com, card_uid, card_exp, destination_post, destination_addr, destination_detail, users_user_uid } = req.body
     const { order_uid } = req.params
+    const order_date = new Date();
 
     try {
         await orderService.order(order_uid, order_date, order_amount, card_com, card_uid, card_exp, destination_post, destination_addr, destination_detail, users_user_uid)
@@ -24,6 +25,7 @@ exports.orderPage = async (req, res) => {
     
     try{
         let sess = req.session.user_uid
+        
         return res.render('index', { page:'./order/order', sess:sess })
     }
 
