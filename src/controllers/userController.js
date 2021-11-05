@@ -69,3 +69,16 @@ exports.signinPage = async (req, res) => {
     }
 
 }
+
+exports.logout = async (req, res) => {
+
+    try{
+        req.session.user_uid = null
+        return res.redirect('/')
+    }
+
+    catch (error) {
+        return res.status(500).json(error)
+    }
+
+}
