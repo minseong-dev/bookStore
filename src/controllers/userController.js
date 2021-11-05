@@ -73,8 +73,13 @@ exports.signinPage = async (req, res) => {
 exports.logout = async (req, res) => {
 
     try{
-        req.session.user_uid = null
-        return res.redirect('/')
+        req.session.destroy(function(){
+            req.session;
+        });
+        return res.send(`<script type="text/javascript">
+            alert("로그아웃 되었습니다."); 
+            location.href='/';
+            </script>`);
     }
 
     catch (error) {
