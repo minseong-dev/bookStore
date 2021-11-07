@@ -110,7 +110,7 @@ exports.addDest = async (req, res) => {
 
     try{
 
-        let destination_uid = String(Math.random()*100000000)
+        let destination_uid = String(Math.random()*100000000000000000)
 
         await myPageService.addDest(destination_uid, destination_post, destination_addr, destination_detail, users_user_uid)
         return res.redirect('/myPage/main/'+users_user_uid)
