@@ -5,7 +5,9 @@
     <p class="fs-2">재고: <%= detail_info[0].book_stock %>권</p>
     <p class="fs-2">가격: <%= detail_info[0].book_price %>원</p>
     <div class='mt-5'>
-      <button type="button" class="btn btn-primary btn-lg">구매</button>
-      <button type="button" class="btn btn-primary btn-lg">담기</button>
+      <% if(sess != null) { %>
+        <button type="button" class="btn btn-primary btn-lg" onclick="location.href='/order/orderPage/<%= detail_info[0].book_uid %>'">구매</button>
+        <button type="button" class="btn btn-primary btn-lg">담기</button>
+      <% } %>
     </div>
 </div>
