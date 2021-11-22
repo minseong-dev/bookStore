@@ -1,0 +1,7 @@
+exports.itemDetail = 'select a.baskets_basket_uid, a.books_book_uid, book_count, b.book_uid, b.book_name, b.book_stock, b.book_price, b.book_writer from basket_lists a, books b where a.books_book_uid = b.book_uid and a.baskets_basket_uid=?'
+exports.basketDetail = 'select * from baskets where basket_uid=? order by basket_date'
+exports.addBasket = 'insert into baskets(basket_uid, basket_date, basket, users_user_uid) values(?, ?, ?)'
+exports.addItem = 'insert into basket_lists(baskets_basket_uid, books_book_uid) values(?, ?)'
+exports.deleteItem = 'delete from basket_lists where baskets_basket_uid=? and books_book_uid=?'
+exports.deleteItem2 = 'delete from basket_lists where baskets_basket_uid=?'
+exports.deleteBasket = 'delete from baskets where basket_uid=?' 

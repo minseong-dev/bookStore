@@ -5,7 +5,7 @@ const myPageService= require('../services/myPageService')
 exports.order = async (req, res) => {
 
     const { book_price, card_uid, destination_uid } = req.body
-    const { books_book_uid, book_count } = req.body
+    let { books_book_uid, book_count } = req.body
 
     try {
 
@@ -29,15 +29,13 @@ exports.order = async (req, res) => {
 
         await orderService.addOrder(order_uid, order_date, order_amount, card_com, card_uid, card_exp, destination_post, destination_addr, destination_detail, users_user_uid)
         
-        //for (var i = 0; i < books_book_uid.length; i++){
+        for (var i = 0; i < books_book_uid.length; i++){
             
-            //let books_book_uid = books_book_uid[i]
-            //let book_count = book_count[i]
-            console.log(books_book_uid)
-            console.log(book_count)
-            await orderService.addOrderList(order_uid, books_book_uid, book_count)
-            await orderService.minusBookCount(book_count, books_book_uid)
-        //}
+            let book_uid = books_book_uid[i]
+            let count = book_count[i]
+            await orderService.addOrderList(order_uid, book_uid, count)
+            await orderService.minusBookCount(count, book_uid)
+        }
 
         return res.send(`<script type="text/javascript">
                 alert("주문이 완료되었습니다."); 
