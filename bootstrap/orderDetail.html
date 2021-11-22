@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <title>BOOK STORE</title>
+  </head>
+  <body>
+
+    <!-- navbar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">HOME</a>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page">minn님</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/user/logout">로그아웃</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/myPage/main/<%= sess %>">마이페이지</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">장바구니</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">주문내역</a>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+    <div class='container mt-5'>
+    <!-- table -->
+    <div class='container'>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col" style='width: 33%'>주문번호</th>
+                <th scope="col" style='width: 33%'>주문일자</th>
+                <th scope="col" style='width: 33%'>주문금액</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+            <tr>
+                <th>1</th>
+                <td>2021-11-08</a></td>
+                <td>14000원</td>
+            </tr>
+            
+            </tbody>
+        </table><table class="table table-striped">
+        </table>
+        
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col" style='width: 33%'>#</th>
+                <th scope="col" style='width: 33%'>책이름</th>
+                <th scope="col" style='width: 20%'>가격</th>
+                <th scope="col" style='width: 14%'>수량</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+            <tr>
+                <th>1</th>
+                <td>오후도 서점 이야기</a></td>
+                <td>14000원</td>
+                <td>1</td>
+            </tr>
+            
+            </tbody>
+        </table><table class="table table-striped">
+        </table>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col" style='width: 33%'>배송지 우편번호</th>
+                <th scope="col" style='width: 33%'>배송지 기본주소</th>
+                <th scope="col" style='width: 33%'>배송지 상세주소</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+            <tr>
+                <th>1654</th>
+                <td>부산광역시 사상구 주례동 47</a></td>
+                <td>뉴밀 2층</td>
+            </tr>
+            
+            </tbody>
+        </table><table class="table table-striped">
+        </table>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col" style='width: 33%'>신용카드 카드번호</th>
+                <th scope="col" style='width: 33%'>신용카드 카드종류</th>
+                <th scope="col" style='width: 33%'>신용카드 유효기간</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+            <tr>
+                <th>1234</th>
+                <td>기업은행</a></td>
+                <td>10/23</td>
+            </tr>
+            
+            </tbody>
+        </table><table class="table table-striped">
+        </table>
+    </div>
+</div>
+    
+
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
