@@ -12,7 +12,10 @@ router.get('/orderPage/:book_uid', orderController.orderPage);
 /* 주문목록 페이지 */
 router.get('/orderListPage', orderController.orderListPage);
 
+/* 주문상세 페이지 */
+router.get('/orderDetailPage/:order_uid', orderController.orderDetailPage);
+
 /* 주문목록 삭제 */
-router.delete('/deleteOrder/:order_uid', myPageController.deleteDest);
+router.get('/deleteOrder/:order_uid', orderController.deleteOrder);
 
 module.exports = router;

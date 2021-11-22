@@ -1,36 +1,77 @@
 const orderService = require('../services/orderService')
+const bookService = require('../services/bookService')
+const myPageService= require('../services/myPageService')
 
 exports.order = async (req, res) => {
 
-    const { order_amount, card_com, card_uid, card_exp, destination_post, destination_addr, destination_detail, users_user_uid } = req.body
-    const { order_uid } = req.params
-    const order_date = new Date();
+    const { book_price, card_uid, destination_uid } = req.body
+    const { books_book_uid, book_count } = req.body
 
     try {
-        await orderService.order(order_uid, order_date, order_amount, card_com, card_uid, card_exp, destination_post, destination_addr, destination_detail, users_user_uid)
+
+        let users_user_uid = req.session.user_uid
+        let order_uid = String(Math.random()*100000000000000000)
+        let order_date = new Date()
+
+        let order_amount = book_price * book_count
+
+        let card_info = await myPageService.cardDetail(card_uid)
+        let dest_info = await myPageService.destDetail(destination_uid)
+
+        let card = card_info[0]
+        let dest = dest_info[0]
+
+        let card_com = card.card_com
+        let card_exp = card.card_exp
+        let destination_post = dest.destination_post
+        let destination_addr = dest.destination_addr
+        let destination_detail = dest.destination_detail
+
+        await orderService.addOrder(order_uid, order_date, order_amount, card_com, card_uid, card_exp, destination_post, destination_addr, destination_detail, users_user_uid)
+        
+        //for (var i = 0; i < books_book_uid.length; i++){
+            
+            //let books_book_uid = books_book_uid[i]
+            //let book_count = book_count[i]
+            console.log(books_book_uid)
+            console.log(book_count)
+            await orderService.addOrderList(order_uid, books_book_uid, book_count)
+            await orderService.minusBookCount(book_count, books_book_uid)
+        //}
 
         return res.send(`<script type="text/javascript">
                 alert("주문이 완료되었습니다."); 
-                location.href='./orderList`+users_user_uid`';
+                location.href='./orderListPage';
                 </script>`);
     }
 
     catch(error) {
-        return res.status(500).json(error)
+        console.log(error)
     }
 
 }
 
 exports.orderPage = async (req, res) => {
+
+    const { book_uid } = req.params
     
     try{
         let sess = req.session.user_uid
-        
-        return res.render('index', { page:'./order/order', sess:sess })
+        let book_info = await bookService.bookDetail(book_uid)
+        let card_info = await myPageService.cardList(sess)
+        let dest_info = await myPageService.destList(sess)
+
+        return res.render('index', {
+            page:'./order/order',
+            sess:sess,
+            book_info:book_info,
+            card_info:card_info,
+            dest_info:dest_info
+         })
     }
 
     catch (error) {
-        return res.status(500).json(error)
+        console.log(error)
     }
 
 }
@@ -39,9 +80,66 @@ exports.orderListPage = async (req, res) => {
     
     try{
         let sess = req.session.user_uid
-        return res.render('index', { page:'./order/orderList', sess:sess })
+        let order_info = await orderService.selectOrder(sess)
+        return res.render('index', { 
+            page:'./order/orderList',
+            sess:sess,
+            order_info:order_info
+        })
     }
 
+    catch (error) {
+        return res.status(500).json(error)
+    }
+
+}
+
+exports.orderDetailPage = async (req, res) => {
+    
+    const { order_uid } = req.params
+
+    try{
+        let sess = req.session.user_uid
+        let order_info = await orderService.orderDetail(order_uid)
+        let bookList_info = await orderService.orderBookList(order_uid)
+
+
+        return res.render('index', { 
+            page:'./order/orderList',
+            sess:sess,
+            order_info:order_info,
+            bookList_info:bookList_info
+        })
+    }
+
+    catch (error) {
+        return res.status(500).json(error)
+    }
+
+}
+
+exports.deleteOrder = async (req, res) => {
+    
+    const { order_uid } = req.params
+    
+    try{
+
+        let orderList_info = await orderService.selectOrderList(order_uid)
+
+        for(var i = 0; i<orderList_info.length; i++){
+
+            let book_count = orderList_info[i].book_count
+            let books_book_uid = orderList_info[i].books_book_uid
+
+            await orderService.plusOrder(book_count, books_book_uid)
+            await orderService.deleteOrderList(order_uid, books_book_uid)
+        }
+
+        await orderService.deleteOrder(order_uid)
+
+        return res.redirect('/order/orderListPage/')
+    } 
+    
     catch (error) {
         return res.status(500).json(error)
     }
