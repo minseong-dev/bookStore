@@ -4,7 +4,7 @@ var router = express.Router();
 const basketController = require('../controllers/basketController')
 
 /* 항목 담기 */
-router.post('/addItem/:book_uid', basketController.addItem);
+router.get('/addItem/:book_uid', basketController.addItem);
 
 /* 항목 삭제 */
 router.get('/deleteItem/:book_uid', basketController.deleteItem);

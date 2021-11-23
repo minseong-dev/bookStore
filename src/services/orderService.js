@@ -1,10 +1,10 @@
 const db = require('../../middleware/db')
 const orderQuery = require('../queries/orderQuery')
 
-exports.addOrder = async (order_uid, order_date, order_amount, card_com, card_uid, card_exp, destination_post, destination_addr, destination_detail, users_user_uid) => {
+exports.addOrder = async (order_uid, order_date, order_amount, card_com, card_uid, card_exp, destination_post, destination_addr, destination_detail, users_user_uid, point) => {
 
     try{
-        let addOrder = await db.query(orderQuery.addOrder, [order_uid, order_date, order_amount, card_com, card_uid, card_exp, destination_post, destination_addr, destination_detail, users_user_uid])
+        let addOrder = await db.query(orderQuery.addOrder, [order_uid, order_date, order_amount, card_com, card_uid, card_exp, destination_post, destination_addr, destination_detail, users_user_uid, point])
         return addOrder[0]
     }
 

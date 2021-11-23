@@ -1,2 +1,5 @@
-exports.signup = 'insert into users(user_uid, user_password, user_name) values(?, ?, ?)'
+exports.signup = 'insert into users(user_uid, user_password, user_name, recom) values(?, ?, ?, ?)'
 exports.signin = 'select * from users where user_uid=? and user_password=?'
+exports.pointUp = 'update users set point = (point + 10000) where user_uid = ?'
+exports.pointDown = 'update users set point = (point - ?) where user_uid = ?'
+exports.point = 'select point from users where user_uid=?'
