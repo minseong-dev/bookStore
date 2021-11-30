@@ -14,7 +14,7 @@ exports.order = async (req, res) => {
         let order_uid = String(Math.random()*100000000000000000)
         let order_date = new Date()
         let order_amount = 0
-        if (books_book_uid.length<1){
+        if (books_book_uid.length>1){
             for (var i = 0; i < books_book_uid.length; i++){
                 let price = book_price[i]
                 let count = book_count[i]
@@ -22,9 +22,9 @@ exports.order = async (req, res) => {
                 console.log(count)
                 order_amount = order_amount + price*count
             }
+        } else{
+            order_amount = book_price*book_count
         }
-        
-        order_amount = book_price*book_count
 
         let card_info = await myPageService.cardDetail(card_uid)
         let dest_info = await myPageService.destDetail(destination_uid)
@@ -39,7 +39,6 @@ exports.order = async (req, res) => {
         let destination_detail = dest.destination_detail
 
         order_amount = order_amount - point
-        console.log(point)
 
         await userService.pointDown(point, users_user_uid)
 

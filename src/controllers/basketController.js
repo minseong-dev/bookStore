@@ -33,7 +33,6 @@ exports.basketPage = async (req, res) => {
     try{
         let sess = req.session.user_uid
         let basket_info = await basketService.basketDetail(sess)
-        console.log(basket_info)
         let basket = basket_info[0]
         let basket_uid = basket.basket_uid
 
