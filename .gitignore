@@ -1,9 +1,10 @@
 # modules
 node_modules/
+
+# middleware
 middleware/
 
 # images
-
 images/
 *.png
 *.jpg
