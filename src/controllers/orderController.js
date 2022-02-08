@@ -1,19 +1,30 @@
 const orderService = require('../services/orderService')
 const bookService = require('../services/bookService')
 const myPageService= require('../services/myPageService')
+const userService= require('../services/userService')
 
 exports.order = async (req, res) => {
 
-    const { book_price, card_uid, destination_uid } = req.body
-    const { books_book_uid, book_count } = req.body
+    const { book_price, card_uid, destination_uid, point } = req.body
+    let { books_book_uid, book_count } = req.body
 
     try {
 
         let users_user_uid = req.session.user_uid
         let order_uid = String(Math.random()*100000000000000000)
         let order_date = new Date()
-
-        let order_amount = book_price * book_count
+        let order_amount = 0
+        if (books_book_uid.length>1){
+            for (var i = 0; i < books_book_uid.length; i++){
+                let price = book_price[i]
+                let count = book_count[i]
+                console.log(price)
+                console.log(count)
+                order_amount = order_amount + price*count
+            }
+        } else{
+            order_amount = book_price*book_count
+        }
 
         let card_info = await myPageService.cardDetail(card_uid)
         let dest_info = await myPageService.destDetail(destination_uid)
@@ -27,17 +38,19 @@ exports.order = async (req, res) => {
         let destination_addr = dest.destination_addr
         let destination_detail = dest.destination_detail
 
-        await orderService.addOrder(order_uid, order_date, order_amount, card_com, card_uid, card_exp, destination_post, destination_addr, destination_detail, users_user_uid)
+        order_amount = order_amount - point
+
+        await userService.pointDown(point, users_user_uid)
+
+        await orderService.addOrder(order_uid, order_date, order_amount, card_com, card_uid, card_exp, destination_post, destination_addr, destination_detail, users_user_uid, point)
         
-        //for (var i = 0; i < books_book_uid.length; i++){
+        for (var i = 0; i < books_book_uid.length; i++){
             
-            //let books_book_uid = books_book_uid[i]
-            //let book_count = book_count[i]
-            console.log(books_book_uid)
-            console.log(book_count)
-            await orderService.addOrderList(order_uid, books_book_uid, book_count)
-            await orderService.minusBookCount(book_count, books_book_uid)
-        //}
+            let book_uid = books_book_uid[i]
+            let count = book_count[i]
+            await orderService.addOrderList(order_uid, book_uid, count)
+            await orderService.minusBookCount(count, book_uid)
+        }
 
         return res.send(`<script type="text/javascript">
                 alert("주문이 완료되었습니다."); 

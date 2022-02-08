@@ -1,4 +1,5 @@
 const myPageService = require('../services/myPageService')
+const userService = require('../services/userService')
 
 exports.myPage = async (req, res) => {
 
@@ -8,11 +9,13 @@ exports.myPage = async (req, res) => {
         let card_info = await myPageService.cardList(users_user_uid)
         let dest_info = await myPageService.destList(users_user_uid)
         let sess = req.session.user_uid
+        let point = await userService.point(sess)
         return res.render('index', {
             page:'./myPage/myPage',
             sess:sess, 
             card_info:card_info,
-            dest_info:dest_info
+            dest_info:dest_info,
+            point:point
         })
     }
 

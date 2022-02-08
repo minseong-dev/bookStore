@@ -1,10 +1,52 @@
 const db = require('../../middleware/db')
 const userQuery = require('../queries/userQuery')
 
-exports.signup = async (user_uid, user_password, user_name) => {
+exports.pointUp = async (recom) => {
 
     try{
-        let signup = await db.query(userQuery.signup, [user_uid, user_password, user_name])
+        let pointUp = await db.query(userQuery.pointUp, [recom])
+        return pointUp[0]
+    }
+
+    catch (error) {
+        console.log(error)
+        throw Error(error)
+    }
+
+}
+
+exports.point = async (sess) => {
+
+    try{
+        let point = await db.query(userQuery.point, [sess])
+        return point[0]
+    }
+
+    catch (error) {
+        console.log(error)
+        throw Error(error)
+    }
+
+}
+
+exports.pointDown = async (point, users_user_uid) => {
+
+    try{
+        let pointDown = await db.query(userQuery.pointDown, [point, users_user_uid])
+        return pointDown[0]
+    }
+
+    catch (error) {
+        console.log(error)
+        throw Error(error)
+    }
+
+}
+
+exports.signup = async (user_uid, user_password, user_name, recom) => {
+
+    try{
+        let signup = await db.query(userQuery.signup, [user_uid, user_password, user_name, recom])
         return signup[0]
     }
 

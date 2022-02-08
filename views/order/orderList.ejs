@@ -7,6 +7,7 @@
                 <th scope="col">주문번호</th>
                 <th scope="col">주문일자</th>
                 <th scope="col">주문금액</th>
+                <th scope="col">포인트사용금액</th>
                 <th scope="col"></th>
           </tr>
             </tr>
@@ -17,6 +18,7 @@
                 <th  style='vertical-align: middle'><a href=''><%= order.order_uid %></a></th>
                 <td  style='vertical-align: middle'><%= order.order_date %></a></td>
                 <td  style='vertical-align: middle'><%= order.order_amount %></td>
+                <td  style='vertical-align: middle'><%= order.point %></td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic outlined example">
                         <button type="button" class="btn btn-outline-primary" onclick="location.href='/order/deleteOrder/<%= order.order_uid %>'">삭제</button>
