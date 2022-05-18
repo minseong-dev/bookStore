@@ -2,10 +2,11 @@ const userService = require('../services/userService')
 
 exports.signup = async (req, res) => {
 
-    const { user_uid, user_password, user_name } = req.body
+    const { user_uid, user_password, user_name, recom } = req.body
 
     try {
-        let signup = await userService.signup(user_uid, user_password, user_name)
+        let signup = await userService.signup(user_uid, user_password, user_name, recom)
+        await userService.pointUp(recom)
 
         if(signup == 1062){
             return res.send(`<script type="text/javascript">
